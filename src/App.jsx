@@ -4,15 +4,7 @@ import Navbar from "../Components/Navbar";
 import OrderSummary from "../Components/OrderSummary";
 import SummaryReports from "../Components/SummaryReports";
 
-let itemData = [
-  { name: "Hamburger", price: 250, image: "./assets/hamburger.svg", icon: false },
-  { name: "Chicken Nuggets", price: 300, image: "./assets/chicken.svg", icon: false },
-  { name: "Submarine Sandwich", price: 250, image: "./assets/submarine.svg", icon: false },
-  { name: "Pizza", price: 450, image: "./assets/pizza.svg", icon: false },
-  { name: "Juice", price: 70, image: "./assets/juice.svg", icon: false },
-  { name: "Ice Cream", price: 90, image: "./assets/iceCream.svg", icon: false },
-  { name: "Tea", price: 30, image: "./assets/tea.svg", icon: false },
-];
+import itemData from "../Components/itemData";
 
 let allOrder = [
   { id: 1, orderName: "Sumit Saha", item: 7, price: 847, status: false },
@@ -89,7 +81,7 @@ function App() {
             handelOrder={handelOrder}
           />
           <div className="md:col-span-2 h-[calc(100vh_-_130px)]">
-            <OrderSummary allOrder={orderTable}/>
+            <OrderSummary allOrder={allOrder}/>
             <SummaryReports handelSelect={handelSelect} handelDeliver={handelDeliver} handelDelete={handelDelete} allOrder={orderTable} />
           </div>
         </div>
