@@ -14,54 +14,59 @@ let allOrder = [
   { id: 5, orderName: "Ferdous", item: 5, price: 918, status: false },
   { id: 6, orderName: "Rafe", item: 4, price: 334, status: true },
   { id: 7, orderName: "Sarwar", item: 7, price: 350, status: false },
-  { id: 8, orderName: "Obaidul", item: 3, price: 300, status: false }
+  { id: 8, orderName: "Obaidul", item: 3, price: 300, status: false },
 ];
 
 function App() {
   const [iconState, setIconState] = useState(itemData);
   const [orderTable, setOrderTable] = useState(allOrder);
 
-  function handelSelect(e){
+  function handelSelect(e) {
     console.log(e.currentTarget.value);
-    if(e.currentTarget.value === "Pending"){
-      const allPanding = allOrder.filter((item)=> item.status === false);
+    if (e.currentTarget.value === "Pending") {
+      const allPanding = allOrder.filter((item) => item.status === false);
       setOrderTable(allPanding);
     }
 
-    if(e.currentTarget.value === "Delivered"){
-      const allPanding = allOrder.filter((item)=> item.status === true);
+    if (e.currentTarget.value === "Delivered") {
+      const allPanding = allOrder.filter((item) => item.status === true);
       setOrderTable(allPanding);
     }
 
-    if(e.currentTarget.value === "All"){
+    if (e.currentTarget.value === "All") {
       const allPanding = allOrder.map((item) => item);
       setOrderTable(allPanding);
     }
-
   }
 
-  function handelDelete(orderName){
-
-    const updateAllOrder = orderTable.filter((order => order.orderName !== orderName));
+  function handelDelete(orderName) {
+    const updateAllOrder = orderTable.filter(
+      (order) => order.orderName !== orderName
+    );
     allOrder = updateAllOrder;
     setOrderTable(updateAllOrder);
-
   }
 
-  function handelDeliver(orderName){
-    const deliverItem = orderTable.filter((order => order.orderName === orderName));
+  function handelDeliver(orderName) {
+    const deliverItem = orderTable.filter(
+      (order) => order.orderName === orderName
+    );
     deliverItem[0].status = true;
 
     let updateTable = [...orderTable];
     setOrderTable(updateTable);
-    
   }
   // let length = allOrder.length;
   function handelOrder(totalPrice, orderName, selectedCount) {
-    let newOrder = { id : allOrder.length +1 , orderName: orderName, item: selectedCount, price: totalPrice, status: false };
-    let updateTable = [...orderTable, newOrder]
-    setOrderTable(updateTable);
-    console.log(orderName,"price: ",totalPrice,"total item : ",selectedCount); 
+    let newOrder = {
+      id: allOrder.length + 1,
+      orderName: orderName,
+      item: selectedCount,
+      price: totalPrice,
+      status: false,
+    };
+    allOrder = [...allOrder, newOrder];
+    setOrderTable(allOrder);
   }
   function handelOnSmash(itemName) {
     const updatedItems = iconState.map((item) =>
@@ -81,8 +86,13 @@ function App() {
             handelOrder={handelOrder}
           />
           <div className="md:col-span-2 h-[calc(100vh_-_130px)]">
-            <OrderSummary allOrder={allOrder}/>
-            <SummaryReports handelSelect={handelSelect} handelDeliver={handelDeliver} handelDelete={handelDelete} allOrder={orderTable} />
+            <OrderSummary allOrder={allOrder} />
+            <SummaryReports
+              handelSelect={handelSelect}
+              handelDeliver={handelDeliver}
+              handelDelete={handelDelete}
+              allOrder={orderTable}
+            />
           </div>
         </div>
       </div>
